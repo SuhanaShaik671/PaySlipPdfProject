@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Payslip</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+        td, th {
+            border: 1px solid black;
+            padding: 6px;
+            vertical-align: top;
+        }
+        .no-border {
+            border: none !important;
+        }
+        .center {
+            text-align: center;
+        }
+        .right {
+            text-align: right;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .company-name {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .small {
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+
+<table>
+    <!-- Row 1: Company name, address, logo -->
+    <tr>
+        <td class="no-border">
+            <span class="company-name">FYERS Securities Private Limited</span><br>
+            <span class="small">
+                A-901 & A-902, 9th Floor A wing, Brigade Magnum, Kodige Halli Cross, Amrutha Halli,<br>
+                International Airport Road, Bangalore Karnataka 560032 India
+            </span>
+        </td>
+        <td class="no-border right">
+            <img src="{{ logo_path }}" alt="Logo" height="60">
+        </td>
+    </tr>
+
+    <!-- Row 2: Payslip title -->
+    <tr>
+        <td colspan="2" class="center bold">Payslip for the month of October 2023</td>
+    </tr>
+
+    <!-- Row 3: Employee Pay Summary & Net Pay -->
+    <tr>
+        <td width="70%">
+            <span class="bold">EMPLOYEE PAY SUMMARY</span><br><br>
+            Employee Name: Rajasekhar Varikuti, EM353<br>
+            Designation: Technical Lead Engineer<br>
+            Date of Joining: 21/12/2020<br>
+            Pay Period: October 2023<br>
+            Pay Date: 01/11/2023<br>
+            PF A/C Number: BG/BNG/1960351/000/0010188<br>
+            UAN: 101526255716<br>
+            PAN: AXKPV5382P<br>
+            Bank Account No: 45711749753
+        </td>
+        <td width="30%" class="center bold">
+            Employee Net Pay<br><br>
+            Rs.1,63,617.00<br><br>
+            <span class="small">Paid Days: 31 &nbsp;&nbsp;|&nbsp;&nbsp; LOP Days: 0</span>
+        </td>
+    </tr>
+
+    <!-- Row 4: Earnings and Deductions -->
+    <tr class="bold center">
+        <td colspan="2">
+            <table width="100%">
+                <tr>
+                    <th>EARNINGS</th>
+                    <th>AMOUNT</th>
+                    <th>DEDUCTIONS</th>
+                    <th>AMOUNT</th>
+                </tr>
+                <tr>
+                    <td>Basic</td><td>Rs.1,00,869.00</td>
+                    <td>EPF Contribution</td><td>Rs.1,800.00</td>
+                </tr>
+                <tr>
+                    <td>House Rent Allowance</td><td>Rs.40,348.00</td>
+                    <td>Income Tax</td><td>Rs.36,120.00</td>
+                </tr>
+                <tr>
+                    <td>Flexible Benefit Plan</td><td>Rs.60,520.00</td>
+                    <td>Professional Tax</td><td>Rs.200.00</td>
+                </tr>
+                <tr class="bold">
+                    <td>Gross Earnings</td><td>Rs.2,01,737.00</td>
+                    <td>Total Deductions</td><td>Rs.38,120.00</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <!-- Row 5: Net Pay Table -->
+    <tr>
+        <td colspan="2">
+            <table width="100%">
+                <tr class="bold center">
+                    <th>NET PAY</th>
+                    <th>AMOUNT</th>
+                </tr>
+                <tr>
+                    <td>Gross Earnings</td>
+                    <td>Rs.2,01,737.00</td>
+                </tr>
+                <tr>
+                    <td>(-) Total Deductions</td>
+                    <td>Rs.38,120.00</td>
+                </tr>
+                <tr class="bold">
+                    <td>Total Net Payable</td>
+                    <td>Rs.1,63,617.00</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <!-- Row 6: Net Pay in Words -->
+    <tr>
+        <td colspan="2">
+            Total Net Payable: <b>Rs.1,63,617.00</b> (Indian Rupee One Lakh Sixty-Three Thousand Six Hundred Seventeen Only)<br>
+            <i>**Total Net Payable = Gross Earnings - Total Deductions</i>
+        </td>
+    </tr>
+
+    <!-- Row 7: Footer -->
+    <tr>
+        <td colspan="2" class="center small">
+            -- This is a system generated payslip, hence the signature is not required. --
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+﻿# Python / Django ignores
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+db.sqlite3
+*.log
+*.pot
+*.pyc
+
+# Build / packaging
+*.egg-info/
+dist/
+build/
+
+# Editor / OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Static/media
+staticfiles/
+media/
