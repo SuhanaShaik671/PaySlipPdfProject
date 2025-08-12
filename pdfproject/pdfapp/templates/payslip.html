@@ -1,154 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Payslip</title>
+    <meta charset="UTF-8">
+    <title>Payslip - {{ payslip_month }}</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid black;
-        }
-        td, th {
-            border: 1px solid black;
-            padding: 6px;
-            vertical-align: top;
-        }
-        .no-border {
-            border: none !important;
-        }
-        .center {
-            text-align: center;
-        }
-        .right {
-            text-align: right;
-        }
-        .bold {
-            font-weight: bold;
-        }
-        .company-name {
-            font-size: 14px;
-            font-weight: bold;
-        }
-        .small {
-            font-size: 11px;
-        }
+        body { font-family: Arial, sans-serif; font-size: 12px; }
+        table { border-collapse: collapse; width: 100%; }
+        .bordered td, .bordered th { border: 1px solid black; padding: 4px; }
+        .no-border td { border: none; padding: 2px; }
+        .center { text-align: center; }
+        .right { text-align: right; }
+        .bold { font-weight: bold; }
+        .logo { max-height: 50px; }
     </style>
 </head>
 <body>
 
-<table>
-    <!-- Row 1: Company name, address, logo -->
+<table class="bordered">
+    <!-- Company header -->
     <tr>
-        <td class="no-border">
-            <span class="company-name">FYERS Securities Private Limited</span><br>
-            <span class="small">
-                A-901 & A-902, 9th Floor A wing, Brigade Magnum, Kodige Halli Cross, Amrutha Halli,<br>
-                International Airport Road, Bangalore Karnataka 560032 India
-            </span>
+        <td colspan="2">
+            <div class="bold">{{ company_name }}</div>
+            <div>{{ company_address }}</div>
         </td>
-        <td class="no-border right">
-            <img src="{{ logo_path }}" alt="Logo" height="60">
+        <td colspan="2" class="right">
+            <img src="{{ logo_path }}" alt="Company Logo" class="logo">
         </td>
     </tr>
 
-    <!-- Row 2: Payslip title -->
+    <!-- Payslip title -->
     <tr>
-        <td colspan="2" class="center bold">Payslip for the month of October 2023</td>
+        <td colspan="4" class="center bold">Pay Slip for the Month of {{ payslip_month }}</td>
     </tr>
 
-    <!-- Row 3: Employee Pay Summary & Net Pay -->
+    <!-- Employee & Pay Info -->
     <tr>
-        <td width="70%">
-            <span class="bold">EMPLOYEE PAY SUMMARY</span><br><br>
-            Employee Name: Rajasekhar Varikuti, EM353<br>
-            Designation: Technical Lead Engineer<br>
-            Date of Joining: 21/12/2020<br>
-            Pay Period: October 2023<br>
-            Pay Date: 01/11/2023<br>
-            PF A/C Number: BG/BNG/1960351/000/0010188<br>
-            UAN: 101526255716<br>
-            PAN: AXKPV5382P<br>
-            Bank Account No: 45711749753
+        <td colspan="2" style="vertical-align: top;">
+            <table class="no-border">
+                <tr><td>Employee Name:</td><td>{{ employee_name }}</td></tr>
+                <tr><td>Employee Code:</td><td>{{ employee_code }}</td></tr>
+                <tr><td>Designation:</td><td>{{ designation }}</td></tr>
+                <tr><td>Date of Joining:</td><td>{{ doj }}</td></tr>
+                <tr><td>Pay Period:</td><td>{{ pay_period }}</td></tr>
+                <tr><td>Pay Date:</td><td>{{ pay_date }}</td></tr>
+                <tr><td>PF Number:</td><td>{{ pf_number }}</td></tr>
+                <tr><td>UAN:</td><td>{{ uan }}</td></tr>
+                <tr><td>PAN:</td><td>{{ pan }}</td></tr>
+                <tr><td>Bank A/c:</td><td>{{ bank_account }}</td></tr>
+            </table>
         </td>
-        <td width="30%" class="center bold">
-            Employee Net Pay<br><br>
-            Rs.1,63,617.00<br><br>
-            <span class="small">Paid Days: 31 &nbsp;&nbsp;|&nbsp;&nbsp; LOP Days: 0</span>
+        <td colspan="2" style="vertical-align: top;">
+            <table class="no-border">
+                <tr><td>Net Pay:</td><td class="bold">{{ net_pay }}</td></tr>
+                <tr><td>Paid Days:</td><td>{{ paid_days }}</td></tr>
+                <tr><td>LOP Days:</td><td>{{ lop_days }}</td></tr>
+            </table>
         </td>
     </tr>
 
-    <!-- Row 4: Earnings and Deductions -->
+    <!-- Earnings & Deductions Table -->
     <tr class="bold center">
-        <td colspan="2">
-            <table width="100%">
-                <tr>
-                    <th>EARNINGS</th>
-                    <th>AMOUNT</th>
-                    <th>DEDUCTIONS</th>
-                    <th>AMOUNT</th>
-                </tr>
-                <tr>
-                    <td>Basic</td><td>Rs.1,00,869.00</td>
-                    <td>EPF Contribution</td><td>Rs.1,800.00</td>
-                </tr>
-                <tr>
-                    <td>House Rent Allowance</td><td>Rs.40,348.00</td>
-                    <td>Income Tax</td><td>Rs.36,120.00</td>
-                </tr>
-                <tr>
-                    <td>Flexible Benefit Plan</td><td>Rs.60,520.00</td>
-                    <td>Professional Tax</td><td>Rs.200.00</td>
-                </tr>
-                <tr class="bold">
-                    <td>Gross Earnings</td><td>Rs.2,01,737.00</td>
-                    <td>Total Deductions</td><td>Rs.38,120.00</td>
-                </tr>
-            </table>
-        </td>
+        <td>Earnings</td>
+        <td>Amount</td>
+        <td>Deductions</td>
+        <td>Amount</td>
     </tr>
 
-    <!-- Row 5: Net Pay Table -->
+    {% for earn, deduct in rows %}
     <tr>
-        <td colspan="2">
-            <table width="100%">
-                <tr class="bold center">
-                    <th>NET PAY</th>
-                    <th>AMOUNT</th>
-                </tr>
-                <tr>
-                    <td>Gross Earnings</td>
-                    <td>Rs.2,01,737.00</td>
-                </tr>
-                <tr>
-                    <td>(-) Total Deductions</td>
-                    <td>Rs.38,120.00</td>
-                </tr>
-                <tr class="bold">
-                    <td>Total Net Payable</td>
-                    <td>Rs.1,63,617.00</td>
-                </tr>
-            </table>
-        </td>
+        <td>{{ earn.0 }}</td>
+        <td class="right">{{ earn.1 }}</td>
+        <td>{{ deduct.0 }}</td>
+        <td class="right">{{ deduct.1 }}</td>
+    </tr>
+    {% endfor %}
+
+    <!-- Totals -->
+    <tr class="bold">
+        <td>Gross Earnings</td>
+        <td class="right">{{ gross_earnings }}</td>
+        <td>Total Deductions</td>
+        <td class="right">{{ total_deductions }}</td>
     </tr>
 
-    <!-- Row 6: Net Pay in Words -->
+    <!-- Net Pay Section -->
+    <tr class="bold center">
+        <td colspan="2">Net Pay</td>
+        <td colspan="2">Amount</td>
+    </tr>
     <tr>
-        <td colspan="2">
-            Total Net Payable: <b>Rs.1,63,617.00</b> (Indian Rupee One Lakh Sixty-Three Thousand Six Hundred Seventeen Only)<br>
-            <i>**Total Net Payable = Gross Earnings - Total Deductions</i>
-        </td>
+        <td colspan="2">Gross Earnings</td>
+        <td colspan="2" class="right">{{ gross_earnings }}</td>
+    </tr>
+    <tr>
+        <td colspan="2">Total Deductions</td>
+        <td colspan="2" class="right">(-){{ total_deductions }}</td>
+    </tr>
+    <tr>
+        <td colspan="2">Total Net Payable</td>
+        <td colspan="2" class="right">{{ net_pay }}</td>
     </tr>
 
-    <!-- Row 7: Footer -->
+    <!-- Net Pay in Words + Formula -->
     <tr>
-        <td colspan="2" class="center small">
-            -- This is a system generated payslip, hence the signature is not required. --
-        </td>
+        <td colspan="4">
+            <strong>Total Net Payable Rs.1,63,617.00</strong> {{ net_pay_words }}  <br>
+         <em>**</em>{{net_pay_formula}} </td>
     </tr>
 </table>
 
