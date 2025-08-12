@@ -4,7 +4,7 @@ import pdfkit
 import os
 
 def PayslipPDFView(request):
-    # Logo absolute path
+    # Logo path
     logo_path = os.path.abspath('pdfapp/static/logo.jpg')
     logo_url = 'file:///' + logo_path.replace('\\', '/')
 
